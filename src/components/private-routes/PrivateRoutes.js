@@ -3,16 +3,14 @@ import configsRoute from '../../configs/roles'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 export default class PrivateRoutes extends Component {
-    state = {
-        allowedRoutes: configsRoute[this.props.role].allowedRoutes,
-        redirectRoute: configsRoute[this.props.role].redirect,
-    }
-
     render() {
+        const allowedRoutes = configsRoute[this.props.role].allowedRoutes
+        const redirectRoute = configsRoute[this.props.role].redirect
+
         return (
             <div>
                 <Switch>
-                    {this.state.allowedRoutes.map(el => {
+                    {allowedRoutes.map(el => {
                         return (
                             <Route
                                 exact path={el.url}
@@ -21,7 +19,7 @@ export default class PrivateRoutes extends Component {
                             />
                         )
                     })}
-                    <Redirect to={this.state.redirectRoute} />
+                    <Redirect to={redirectRoute} />
                 </Switch>
             </div>
         )
